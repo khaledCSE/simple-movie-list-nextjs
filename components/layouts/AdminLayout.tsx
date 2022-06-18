@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListAlt, Movie, MovieCreation } from '@mui/icons-material';
 import Link from 'next/link';
+import { Button } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -32,6 +33,8 @@ const AdminLayout = (props: any) => {
                     {/* <Typography variant="h6" noWrap component="div">
                 Movie List
             </Typography> */}
+                    <Box flexGrow={1}></Box>
+                    <Button variant="outlined">Logout</Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -56,14 +59,24 @@ const AdminLayout = (props: any) => {
                 </Toolbar>
                 <Divider />
                 <List>
-                    {['All Movies', 'Add Movie'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>{index % 2 === 0 ? <ListAlt /> : <Movie />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {' '}
+                                <ListAlt />{' '}
+                            </ListItemIcon>
+                            <ListItemText primary="All Movies" />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {' '}
+                                <Movie />{' '}
+                            </ListItemIcon>
+                            <ListItemText primary="Add Movie" />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}>

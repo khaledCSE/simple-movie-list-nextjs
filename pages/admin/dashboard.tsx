@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,28 +14,54 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListAlt, Movie } from '@mui/icons-material';
 import MovieCard from '../../components/MovieCard';
 import AdminLayout from '../../components/layouts/AdminLayout';
-import { Grid } from '@mui/material';
-import { movies } from '../../seed/movie.seeds';
+import { CircularProgress, Grid } from '@mui/material';
+import Spinner from '../../components/shared/Spinner';
+// import { movies } from '../../seed/movie.seeds';
 
 const drawerWidth = 240;
 
+export interface iMovie {
+    _id: string;
+    title: string;
+    shortDescription: string;
+    description: string;
+    image: string;
+    year: string;
+    genre: string;
+    rating: number;
+}
+
 export default function PermanentDrawerLeft() {
+    const [movies, setMovies] = useState<iMovie[]>([]);
+    const [loading, setloading] = useState(true);
+    useEffect(() => {
+        const get = async () => {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/movies`);
+            const data = await res.json();
+            setMovies(data);
+            setloading(false);
+        };
+        get();
+    }, []);
     return (
         <AdminLayout>
-            <Grid container spacing={3}>
-                {movies.map((movie) => (
-                    <Grid item>
-                        <MovieCard
-                            key={movie._id}
-                            title={movie.title}
-                            shortDescription={movie.shortDescription}
-                            image={movie.image}
-                            link={`/movies/admin/${movie._id}`}
-                            year={movie.year}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+            {loading ? (
+                <Spinner />
+            ) : (
+                <Grid container spacing={3}>
+                    {movies.map((movie) => (
+                        <Grid item key={movie._id}>
+                            <MovieCard
+                                title={movie.title}
+                                shortDescription={movie.shortDescription}
+                                image={movie.image}
+                                link={`/movies/admin/${movie._id}`}
+                                year={movie.year}
+                            />
+                        </Grid>
+                    ))}
+                </Grid>
+            )}
         </AdminLayout>
     );
 }
