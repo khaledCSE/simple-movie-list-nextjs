@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import path from 'path';
 import { promisify } from 'util';
+import { verifyToken } from '../middlewares/access-control.middleware';
 import Movie from '../models/Movie.model';
 
 const router = Router();
@@ -29,7 +30,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 // Add
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', verifyToken, async (req: Request, res: Response) => {
     try {
         const ALLOWED_EXTENSIONS = /png|jpg|jpeg|webp/;
         const { title, shortDescription, description, genre, rating, year } = req.body;
@@ -79,7 +80,7 @@ router.post('/', async (req: Request, res: Response) => {
 });
 
 // Update
-router.patch('/', async (req: Request, res: Response) => {
+router.patch('/', verifyToken, async (req: Request, res: Response) => {
     try {
         const ALLOWED_EXTENSIONS = /png|jpg|jpeg|webp/;
         const { movieId, title, shortDescription, description, genre, rating, year } = req.body;
@@ -134,7 +135,7 @@ router.patch('/', async (req: Request, res: Response) => {
 });
 
 // Delete
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
     try {
         const id = req.params;
         const deleted = await Movie.findByIdAndRemove(id);
