@@ -22,9 +22,11 @@ const handle = nextApp.getRequestHandler();
 
 // Routers
 import movieRouter from './routers/movie.router';
+import authRouter from './routers/auth.router';
 
 export const UseRoutesToApp = (app: Application) => {
     app.use('/api/movies', movieRouter);
+    app.use('/api/auth', authRouter);
     app.use('/uploads', express.static(path.resolve('server', 'uploads')));
 };
 
