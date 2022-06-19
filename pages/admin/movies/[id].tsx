@@ -1,6 +1,7 @@
 import { Container, Rating, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import PrivateRoute from '../../../components/auth/PrivateRoute';
 import AdminLayout from '../../../components/layouts/AdminLayout';
 import Spinner from '../../../components/shared/Spinner';
 import { movies } from '../../../seed/movie.seeds';
@@ -36,33 +37,35 @@ const SingleMovie = () => {
     }, [router]);
 
     return (
-        <AdminLayout>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <div className={styles.holder}>
-                    <div className={styles.img}>
-                        <img src={movie.image} alt="" />
-                    </div>
-                    <div className={styles.content}>
-                        <Typography variant="h2">
-                            {movie.title} ({movie.year})
-                        </Typography>
-                        <p style={{ textTransform: 'capitalize' }}>
-                            <b>Genre:</b> {movie.genre}
-                        </p>
-                        <div className={styles.ratings}>
-                            <span>
-                                <b>Rating:</b>
-                            </span>
-                            <Rating value={movie.rating} precision={0.5} />
-                            <span>{movie.rating} / 5</span>
+        <PrivateRoute>
+            <AdminLayout>
+                {loading ? (
+                    <Spinner />
+                ) : (
+                    <div className={styles.holder}>
+                        <div className={styles.img}>
+                            <img src={movie.image} alt="" />
                         </div>
-                        <Typography variant="body1">{movie.description}</Typography>
+                        <div className={styles.content}>
+                            <Typography variant="h2">
+                                {movie.title} ({movie.year})
+                            </Typography>
+                            <p style={{ textTransform: 'capitalize' }}>
+                                <b>Genre:</b> {movie.genre}
+                            </p>
+                            <div className={styles.ratings}>
+                                <span>
+                                    <b>Rating:</b>
+                                </span>
+                                <Rating value={movie.rating} precision={0.5} />
+                                <span>{movie.rating} / 5</span>
+                            </div>
+                            <Typography variant="body1">{movie.description}</Typography>
+                        </div>
                     </div>
-                </div>
-            )}
-        </AdminLayout>
+                )}
+            </AdminLayout>
+        </PrivateRoute>
     );
 };
 

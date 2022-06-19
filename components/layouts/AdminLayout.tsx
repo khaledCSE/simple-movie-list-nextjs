@@ -22,7 +22,7 @@ const AdminLayout = (props: any) => {
     const router = useRouter();
     const logout = () => {
         localStorage.removeItem('sflix-auth-token');
-        router.push('/auth/login');
+        router.push('/');
     };
 
     return (
