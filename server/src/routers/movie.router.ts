@@ -137,7 +137,7 @@ router.patch('/', verifyToken, async (req: Request, res: Response) => {
 // Delete
 router.delete('/:id', verifyToken, async (req: Request, res: Response) => {
     try {
-        const id = req.params;
+        const id = req.params.id;
         const deleted = await Movie.findByIdAndRemove(id);
         res.json({ msg: 'Movie deleted' });
     } catch (err: any) {

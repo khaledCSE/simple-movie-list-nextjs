@@ -59,7 +59,7 @@ const AdminLayout = (props: any) => {
                 anchor="left"
             >
                 <Toolbar>
-                    <Link href="/">
+                    <Link href="/admin/dashboard">
                         <a>
                             {/* <MovieCreation /> */}
                             <Typography variant="h5">sFlix</Typography>
