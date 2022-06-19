@@ -78,7 +78,7 @@ const AdminLayout = (props: any) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => router.push('/admin/movies/add')}>
                             <ListItemIcon>
                                 {' '}
                                 <Movie />{' '}

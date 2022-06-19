@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { shortenText } from './utils/misc.util';
 
 interface iProps {
     title: string;
@@ -25,7 +26,7 @@ const MovieCard: FC<iProps> = (props) => {
                     {title} ({year})
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {shortDescription}
+                    {shortenText(shortDescription, 260)}
                 </Typography>
             </CardContent>
             <CardActions>
