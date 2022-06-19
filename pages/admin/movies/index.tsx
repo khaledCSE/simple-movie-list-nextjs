@@ -26,10 +26,6 @@ const MovieList = () => {
         {
             name: 'title',
             label: 'Title',
-            options: {
-                filter: true,
-                sort: true,
-            },
         },
         { name: 'genre', label: 'Genre' },
         { name: 'year', label: 'Year' },
@@ -38,11 +34,12 @@ const MovieList = () => {
     ];
 
     const tableData = movies.map((movie, index) => ({
-        title: (
-            <Link href={`/admin/movies/edit/${movie._id}`}>
-                <a>{shortenText(movie.title, 50)}</a>
-            </Link>
-        ),
+        // title: (
+        //     <Link href={`/admin/movies/edit/${movie._id}`}>
+        //         <a>{shortenText(movie.title, 50)}</a>
+        //     </Link>
+        // ),
+        title: movie.title,
         genre: movie.genre,
         year: movie.year,
         rating: movie.rating,
