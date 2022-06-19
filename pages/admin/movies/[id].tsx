@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import AdminLayout from '../../../components/layouts/AdminLayout';
 import Spinner from '../../../components/shared/Spinner';
 import { movies } from '../../../seed/movie.seeds';
-import { iMovie } from '../../admin/dashboard';
+import { iMovie } from '../dashboard';
 import styles from './AdminDetails.module.scss';
 
 const SingleMovie = () => {

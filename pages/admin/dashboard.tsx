@@ -16,6 +16,7 @@ import MovieCard from '../../components/MovieCard';
 import AdminLayout from '../../components/layouts/AdminLayout';
 import { CircularProgress, Grid } from '@mui/material';
 import Spinner from '../../components/shared/Spinner';
+import PrivateRoute from '../../components/auth/PrivateRoute';
 // import { movies } from '../../seed/movie.seeds';
 
 const drawerWidth = 240;
@@ -44,24 +45,26 @@ export default function PermanentDrawerLeft() {
         get();
     }, []);
     return (
-        <AdminLayout>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <Grid container spacing={3}>
-                    {movies.map((movie) => (
-                        <Grid item key={movie._id}>
-                            <MovieCard
-                                title={movie.title}
-                                shortDescription={movie.shortDescription}
-                                image={movie.image}
-                                link={`/movies/admin/${movie._id}`}
-                                year={movie.year}
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-            )}
-        </AdminLayout>
+        <PrivateRoute>
+            <AdminLayout>
+                {loading ? (
+                    <Spinner />
+                ) : (
+                    <Grid container spacing={3}>
+                        {movies.map((movie) => (
+                            <Grid item key={movie._id}>
+                                <MovieCard
+                                    title={movie.title}
+                                    shortDescription={movie.shortDescription}
+                                    image={movie.image}
+                                    link={`/admin/movies/${movie._id}`}
+                                    year={movie.year}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+                )}
+            </AdminLayout>
+        </PrivateRoute>
     );
 }

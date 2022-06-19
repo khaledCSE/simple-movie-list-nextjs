@@ -14,10 +14,17 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListAlt, Movie, MovieCreation } from '@mui/icons-material';
 import Link from 'next/link';
 import { Button } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const drawerWidth = 240;
 
 const AdminLayout = (props: any) => {
+    const router = useRouter();
+    const logout = () => {
+        localStorage.removeItem('sflix-auth-token');
+        router.push('/auth/login');
+    };
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -34,7 +41,9 @@ const AdminLayout = (props: any) => {
                 Movie List
             </Typography> */}
                     <Box flexGrow={1}></Box>
-                    <Button variant="outlined">Logout</Button>
+                    <Button variant="outlined" onClick={logout}>
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -53,14 +62,14 @@ const AdminLayout = (props: any) => {
                     <Link href="/">
                         <a>
                             {/* <MovieCreation /> */}
-                            <Typography variant="h5">Movie List</Typography>
+                            <Typography variant="h5">sFlix</Typography>
                         </a>
                     </Link>
                 </Toolbar>
                 <Divider />
                 <List>
                     <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={() => router.push('/admin/movies')}>
                             <ListItemIcon>
                                 {' '}
                                 <ListAlt />{' '}
